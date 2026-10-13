@@ -243,16 +243,13 @@ function renderSelectedDate() {
 
   elements.hijriDate.textContent = getHijriText(day);
 
-  // Always show all five times for the selected date.
+ 
   renderPrayerCards(day);
 
-  // Countdown is meaningful only for today's schedule.
+ 
   updateCountdown();
 }
-
-// =====================================
-// MONTH CALENDAR
-// =====================================
+ 
 
 function renderCalendar() {
   const year = displayedMonth.getFullYear();
@@ -260,12 +257,12 @@ function renderCalendar() {
 
   const firstWeekday = new Date(year, month, 1).getDay();
 
-  // Change Sunday-first to Monday-first.
+ 
   const mondayOffset = (firstWeekday + 6) % 7;
 
   let html = "";
 
-  // Empty cells before the first day of the month.
+ 
   for (let i = 0; i < mondayOffset; i++) {
     html += '<div class="day-cell outside" aria-hidden="true"></div>';
   }
@@ -315,9 +312,7 @@ function renderCalendar() {
   elements.calendarDays.innerHTML = html;
 }
 
-// =====================================
-// CENTERED PRAYER DETAILS POPUP
-// =====================================
+ 
 
 function openPrayerModal(iso) {
   const day = getDayData(iso);
@@ -333,7 +328,7 @@ function openPrayerModal(iso) {
   elements.modalDate.textContent = formatHumanDate(iso);
   elements.modalHijri.textContent = getHijriText(day);
 
-  // Put all five prayer times inside the popup.
+ 
   elements.modalPrayerTimes.innerHTML = PRAYERS.map((prayer) => {
     const time = cleanTime(day.timings[prayer.key]);
 
@@ -365,7 +360,7 @@ function closePrayerModal() {
   }
 }
 
-// Clicking any date opens its popup and updates the main schedule.
+ 
 elements.calendarDays.addEventListener("click", async (event) => {
   const dayCell = event.target.closest(".day-cell[data-date]");
 
@@ -394,9 +389,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// =====================================
-// DATE SELECTION
-// =====================================
+ 
 
 async function selectDate(iso) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return;
@@ -438,7 +431,7 @@ elements.monthPicker.addEventListener("change", (event) => {
 
   const [year, month] = event.target.value.split("-").map(Number);
 
-  // Preserve the selected day when possible.
+ 
   const selectedDay = parseISODate(selectedDate).getDate();
   const lastDay = new Date(year, month, 0).getDate();
   const day = Math.min(selectedDay, lastDay);
@@ -452,9 +445,7 @@ elements.todayButton.addEventListener("click", () => {
   selectDate(localISODate(new Date()));
 });
 
-// =====================================
-// MONTH NAVIGATION
-// =====================================
+ 
 
 async function changeMonth(offset) {
   const targetMonth = new Date(
@@ -463,7 +454,7 @@ async function changeMonth(offset) {
     1
   );
 
-  // Preserve the selected day when possible.
+  
   const selectedDay = parseISODate(selectedDate).getDate();
   const lastDay = new Date(
     targetMonth.getFullYear(),
@@ -485,10 +476,7 @@ elements.prevMonth.addEventListener("click", () => changeMonth(-1));
 elements.nextMonth.addEventListener("click", () => changeMonth(1));
 elements.calendarPrev.addEventListener("click", () => changeMonth(-1));
 elements.calendarNext.addEventListener("click", () => changeMonth(1));
-
-// =====================================
-// NEXT PRAYER COUNTDOWN
-// =====================================
+ 
 
 function resetCountdown(message) {
   elements.nextPrayerName.textContent = "Prayer schedule";
@@ -546,7 +534,7 @@ function updateCountdown() {
   let nextTarget;
 
   if (nextIndex === -1) {
-    // All today's prayers have passed: next is tomorrow's Fajr.
+ 
     nextPrayer = prayerTimes[0];
     previousPrayer = prayerTimes[prayerTimes.length - 1];
 
@@ -598,9 +586,7 @@ function updateCountdown() {
   elements.progressFill.style.width = `${progress}%`;
 }
 
-// =====================================
-// MOBILE NAVIGATION
-// =====================================
+ 
 
 elements.menuButton.addEventListener("click", () => {
   const isOpen = elements.navigation.classList.toggle("open");
@@ -620,9 +606,7 @@ elements.navigation.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// =====================================
-// INITIALIZATION
-// =====================================
+ 
 
 async function init() {
   document.getElementById("year").textContent = new Date().getFullYear();

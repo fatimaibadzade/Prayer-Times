@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Player Time</title>
+</head>
+
+<body>
+    <header class="navbar">
+        <a class="logo" href="#home">☾ Prayer<span>Times</span></a>
+    
+        <nav id="navigation">
+          <a href="#home">Home</a>
+          <a href="#schedule">Prayer Schedule</a>
+          <a href="#calendar">Calendar</a>
+        </nav>
+    
+        <button class="menu-button" id="menuButton" aria-label="Open menu">☰</button>
+      </header>
+    
+      <main class="container" id="home">
+        <section class="hero">
+          <p class="eyebrow">YOUR DAILY SPIRITUAL GUIDE</p>
+          <h1>Find your moment<br>of <span>peace.</span></h1>
+          <p class="hero-description">
+            Keep track of daily prayer times and plan your day with peace and purpose.
+          </p>
+          <div class="location"><span>📍</span> Baku, Azerbaijan</div>
+        </section>
+    
+        <section class="date-panel">
+          <div class="selected-date">
+            <p class="label">YOUR SELECTED DATE</p>
+            <h2 id="selectedDate">Loading...</h2>
+            <p id="hijriDate">Loading Islamic date...</p>
+          </div>
+    
+          <div class="date-controls">
+            <button class="arrow" id="prevMonth" aria-label="Previous month">‹</button>
+    
+            <label class="date-field">
+              <span>MONTH</span>
+              <input type="month" id="monthPicker">
+            </label>
+    
+            <button class="arrow" id="nextMonth" aria-label="Next month">›</button>
+    
+            <label class="date-field">
+              <span>CHOOSE DATE</span>
+              <input type="date" id="datePicker">
+            </label>
+    
+            <button class="today-button" id="todayButton">Today</button>
+          </div>
+        </section>
+    
+        <section class="next-prayer">
+          <div class="next-prayer-info">
+            <p class="eyebrow gold">✦ YOUR NEXT PRAYER</p>
+            <h2 id="nextPrayerName">Loading...</h2>
+            <p id="nextPrayerDescription">Finding your next prayer...</p>
+          </div>
+    
+          <div class="countdown-box">
+            <p class="label">TIME REMAINING</p>
+            <div id="countdown">--:--:--</div>
+            <div class="progress">
+              <div id="progressFill"></div>
+            </div>
+            <p class="countdown-note" id="countdownNote">
+              Countdown updates every second
+            </p>
+          </div>
+        </section>
+    
+        <section class="section" id="schedule">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">DAILY WORSHIP</p>
+              <h2>Daily prayer schedule</h2>
+              <p class="section-description">All five prayer times for your selected date.</p>
+            </div>
+          </div>
+    
+          <div class="prayer-grid" id="prayerGrid">
+            <p class="loading">Loading prayer times...</p>
+          </div>
+    
+          <p id="statusMessage" class="status" role="status">
+            Connecting to AlAdhan API...
+          </p>
+        </section>
+    
+        <section class="section" id="calendar">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">PLAN AHEAD</p>
+              <h2>Monthly prayer calendar</h2>
+              <p class="section-description">Select any day to open its full prayer schedule.</p>
+            </div>
+          </div>
+    
+          <div class="calendar-card">
+            <div class="calendar-heading">
+              <div>
+                <h3 id="calendarMonthTitle">Loading...</h3>
+                <p>Click a date to see all five prayer times</p>
+              </div>
+    
+              <div class="calendar-navigation">
+                <button id="calendarPrev" aria-label="Previous month">‹</button>
+                <button id="calendarNext" aria-label="Next month">›</button>
+              </div>
+            </div>
+    
+            <div class="weekdays">
+              <span>MON</span>
+              <span>TUE</span>
+              <span>WED</span>
+              <span>THU</span>
+              <span>FRI</span>
+              <span>SAT</span>
+              <span>SUN</span>
+            </div>
+    
+            <div class="calendar-days" id="calendarDays">
+              <p class="loading">Loading calendar...</p>
+            </div>
+    
+            <p class="calendar-footer">
+              <span class="legend-dot"></span>
+              Prayer times are retrieved from the AlAdhan API.
+            </p>
+          </div>
+        </section>
+    
+        <footer class="footer">
+          <a class="logo" href="#home">☾ Prayer<span>Times</span></a>
+          <p>Made for peaceful moments. © <span id="year"></span></p>
+        </footer>
+      </main>
+    
+      <!-- Selected date popup -->
+      <div
+        class="prayer-modal-overlay"
+        id="prayerModal"
+        aria-hidden="true"
+      >
+        <div
+          class="prayer-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modalDate"
+        >
+          <button
+            class="prayer-modal-close"
+            id="closePrayerModal"
+            aria-label="Close window"
+          >&times;</button>
+    
+          <p class="modal-eyebrow">✦ PRAYER SCHEDULE</p>
+          <h2 id="modalDate">Selected date</h2>
+          <p class="modal-hijri" id="modalHijri"></p>
+    
+          <div class="modal-prayer-list" id="modalPrayerTimes">
+            <p class="loading">Loading prayer times...</p>
+          </div>
+    
+          <button type="button" class="modal-done" id="modalDone">
+            Close
+          </button>
+        </div>
+      </div>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
